@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <meta charset="UTF-8">
+
+    <meta name="robots" content="noindex,nofollow">
+
+    <!-- ビューポートの設定 -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+
+    <title>[getCurrentPosition()]のサンプルデモ (Geolocation API)</title>
+    <!-- <meta name="description" content="Geolocation APIの[getCurrentPosition()]を利用して、ユーザーの現在位置を取得するサンプルデモです。"> -->
+    <!-- <link rel="canonical" href="https://syncer.jp/how-to-use-geolocation-api/demo/get-current-position.html"> -->
+
+    <meta name="google-site-verification" content="KnpUv1PdKCNMSpoDqLJtOtcJXIInpGMlRYwn17YBVXg">
+
+
+    <!-- <\!-- オープングラフ -\-><meta property="og:site_name" content="SYNCER"><meta property="og:locale" content="ja_JP"><meta property="og:title" content="[getCurrentPosition()]のサンプルデモ (Geolocation API)"><meta property="og:url" content="https://syncer.jp/how-to-use-geolocation-api/demo/get-current-position.html"><meta property="og:image" content="https://syncer.jp/storage/javascript/how-to-use-geolocation-api/static/dst/eyecatch_og.png"><meta property="og:image:width" content="600"><meta property="og:image:height" content="315"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@SyncerJP"><meta name="twitter:creator" content="@arayutw"><meta name="twitter:domain" content="syncer.jp"><meta property="fb:admins" content="100006238021457"><meta property="fb:app_id" content="575493369194271"><link rel="author" href="https://plus.google.com/114918692417332410369/"><link rel="publisher" href="https://plus.google.com/103134813331235422103/"><link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="manifest" href="/manifest.json"><meta name="msapplication-TileColor" content="#d36015"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><meta name="theme-color" content="#d36015"> -->
+
+
+    <!-- <\!-- スタイルシートの読み込み -\-> -->
+    <!-- <link href="geolocation-api.css" rel="stylesheet"> -->
+
+    <!-- <\!-- デモページ用のスタイルシート -\-> -->
+    <!-- <link href="/files/css/demo.css" rel="stylesheet"> -->
+  </head>
+  <body>
+
+    <!-- <header role="banner"> -->
+    <!--   <div class="hd_0 relative center"> -->
+    <!--     <p class="hd_1 mp0"> -->
+    <!--       <a href="https://syncer.jp/" title="ホームに戻る"> -->
+    <!--         <img src="https://syncer.jp/files/images/assets/logo.png" width="200" height="80" class="hd_2" alt="知識、感動をみんなと同期(Sync)するブログ" title="知識、感動をみんなと同期(Sync)するブログ"> -->
+    <!--       </a> -->
+    <!--     </p> -->
+    <!--   </div> -->
+    <!--   <nav id="bc_01" class="bc_0 relative"><ul class="bc_1"><li class="fwa bc_2 fwb i_home bc_4"><a href="/" class="bc_3">ホーム</a></li><li class="fwa bc_2"><a href="/web/" class="bc_3">web制作</a></li><li class="fwa bc_2"><a href="/web/javascript/" class="bc_3">JavaScript</a></li><li class="fwa bc_2"><a href="/how-to-use-geolocation-api" class="bc_3">JavaScriptで位置情報を取得する方法(Geolocation API)</a></li></ul></nav> -->
+    <!-- </header> -->
+
+    <main class="ex_0">
+      <article>
+        <!-- <header> -->
+        <!--   <h1>[getCurrentPosition()]のサンプルデモ (Geolocation API)</h1> -->
+        <!--   <p>Geolocation APIの[getCurrentPosition()]を利用して、ユーザーの現在位置を取得するサンプルデモです。</p> -->
+        <!-- </header> -->
+        <div class="ex_2">
+          <h2>取得したデータ</h2>
+
+          <p>下記の位置情報を取得することができました。</p>
+
+          <dl id="result"></dl>
+
+          <h2>地図</h2>
+
+          <p>Google Mapsに、位置情報を反映させたものです。</p>
+
+          <div class="map-wrapper">
+            <div id="map-canvas"></div>
+          </div>
+
+        </div>
+        <!-- <footer class="ex_1"> -->
+        <!--   <h2>このプログラムの解説</h2> -->
+
+        <!--   <div class="wr_0 ln_0"><a href="/how-to-use-geolocation-api" class="ln_10 block"><dl class="ln_1 ofh"><dt class="ln_2">JavaScriptで位置情報を取得する方法(Geolocation API)</dt><dd class="ln_3"><img src="/files/images/dummy/lazyload-4-3.png" data-src="/storage/javascript/how-to-use-geolocation-api/static/dst/eyecatch_thumb.png" width="160" height="120" alt="JavaScriptで位置情報を取得する方法(Geolocation API)" class="lazy ln_4 mp0"></dd><dd class="ln_5">スマートフォンなどでユーザーの現在地を取得する方法を、JavaScriptをサンプルに解説。</dd></dl></a></div> -->
+        <!-- </footer> -->
+      </article>
+    </main>
+
+
+    <!-- <footer id="repletion" class="ft_0" role="contentinfo"> -->
+    <!--   <p class="ft_2">Sync<span class="ft_1">(同期)</span> <span class="ft_4">x</span> er<span class="ft_1">(する人)</span></p> -->
+    <!--   <p class="ft_3">知識と感動を同期(Sync)する</p> -->
+    <!--   <p class="ft_5"> -->
+    <!--     <small> -->
+    <!--       Copyright © 2014-2017 -->
+    <!--       <br>SYNCER All Rights Reserved. -->
+    <!--       <br>https://syncer.jp/ -->
+    <!--     </small> -->
+    <!--   </p> -->
+    <!-- </footer> -->
+    <!-- <script>var syncer = {} ;</script> -->
+
+
+
+    <!-- JavaScriptの読み込み -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Pxqp7Asgi6D4eOtkCxnir5xPiIwY3EE"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvT7mw1k5GwFDEHRIdFPaCTMvNNle0yz4"></script>
+    <script src="get-current-position.js"></script>
+
+
+    <!-- デモページ用のJavaScript -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+    <!-- <script src="/files/js/demo.js"></script> -->
+    <!-- <script type="application/ld+json">[{"@context":"http:\/\/schema.org","@type":"WebPage","name":"[getCurrentPosition()]\u306e\u30b5\u30f3\u30d7\u30eb\u30c7\u30e2 (Geolocation API)","url":"https:\/\/syncer.jp\/how-to-use-geolocation-api\/demo\/get-current-position.html","image":"https:\/\/syncer.jp\/storage\/javascript\/how-to-use-geolocation-api\/static\/dst\/eyecatch_og.png","inLanguage":"ja-JP","dateCreated":"2014-11-22","datePublished":"2014-11-22","dateModified":"2015-08-16","author":{"@type":"Person","name":"Yuta Arai","alternateName":"\u3042\u3089\u3086","image":"https:\/\/syncer.jp\/files\/images\/assets\/author_product.png"},"description":"Geolocation API\u306e[getCurrentPosition()]\u3092\u5229\u7528\u3057\u3066\u3001\u30e6\u30fc\u30b6\u30fc\u306e\u73fe\u5728\u4f4d\u7f6e\u3092\u53d6\u5f97\u3059\u308b\u30b5\u30f3\u30d7\u30eb\u30c7\u30e2\u3067\u3059\u3002"},{"@context":"http:\/\/schema.org","@type":"SiteNavigationElement","name":"\u30d7\u30ed\u30b0\u30e9\u30e0\u306e\u89e3\u8aac","url":"https:\/\/syncer.jp\/how-to-use-geolocation-api"},{"@context":"http:\/\/schema.org","@type":"Organization","logo":"https:\/\/syncer.jp\/files\/images\/assets\/logo.png","name":"SYNCER","alternateName":"SYNCER","description":"\u77e5\u8b58\u3001\u611f\u52d5\u3092\u307f\u3093\u306a\u3068\u540c\u671f(Sync)\u3059\u308b\u30d6\u30ed\u30b0","foundingDate":"2014-06-10","email":"info@syncer.jp","url":"https:\/\/syncer.jp\/","sameAs":["https:\/\/twitter.com\/SyncerJP","https:\/\/www.facebook.com\/SyncerJP","https:\/\/plus.google.com\/b\/103134813331235422103\/+SyncerJp-Info\/about","https:\/\/instagram.com\/syncerjp"]}]</script> -->
+
+  </body>
+</html>
