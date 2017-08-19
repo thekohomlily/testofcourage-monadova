@@ -49,6 +49,7 @@
 
   </head>
   <body>
+
     <ons-navigator
       var="navi"
       page="toppage.html"
@@ -56,6 +57,10 @@
       ons-postpush="app.pushes = app.pushes + 1"
       ons-postpop="app.pops = app.pops + 1">
     </ons-navigator>
+
+    <audio autoplay loop>
+      <source src="audio/DeathOfLondon.mp3" type="audio/mp3">
+    </audio>
 
     <!-- TopPage -->
     <ons-template id="toppage.html">
