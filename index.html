@@ -91,7 +91,7 @@
               <p class="select-menu">チームに参加する</p>
               <p class="select-menu">プロフィールの設定</p>
               <p class="select-menu">遊び方</p>
-            </div><! --contaner-inner -->
+            </div><!-- contaner-inner -->
           </div><!-- member-container -->
         <div class="member">
       </ons-page>
@@ -235,7 +235,7 @@
           アイテムの生成と配置をここで行います。
         </p>
         <section style="padding: 10px">
-          <ons-button ng-click="navi.pushPage('item.html')">
+          <ons-button ng-click="navi.pushPage('ranking.html')">
             Push Page
           </ons-button>
 
@@ -246,5 +246,45 @@
       </ons-page>
     </ons-template>
 
+    <!-- Ranking -->
+    <ons-template id="ranking.html">
+      <ons-page id="ranking">
+	<ons-scroller style="height: 200px; width: 100%">
+	<div class="left">
+	  <ons-back-button>
+	    <font class="back-button">Back</font>
+	  </ons-back-button>
+	</div>
+	<div class="ranking-container">
+	  <p class="ranking-title-text">Ranking</p>
+	  <div class="ranking-member">
+	    <p class="ranking-member-name">Akihiko Mizuno</p>
+	    <p class="ranking-member-score">56 scores</p>
+	  </div>
+	  <div class="ranking-member">
+	    <p class="ranking-member-name">Kaisei Shimura</p>
+	    <p class="ranking-member-score">44 scores</p>
+	  </div>
+	  <div class="ranking-member">
+	    <p class="ranking-member-name">Zashiki Warahi</p>
+	    <p class="ranking-member-score">99 scores</p>
+	  </div>
+	  <div class="ranking-member">
+	    <p class="ranking-member-name">Oni</p>
+	    <p class="ranking-member-score">78 scores</p>
+	  </div>
+	  <div class="ranking-member">
+	    <p class="ranking-text-onryou"> １番のビビリは</p>
+	    <p class="ranking-text-bloodyslime">Zashiki Warashi</p>
+	    <p class="ranking-text-onryou">です。</p>
+	  </div>
+
+	  <div class="next-button">
+	    <p class="next-button-next" ng-click="navi.pushPage('ranking.html')">Next</p>
+	  </div>
+	</div><!-- ranking-container -->
+	</ons-scroller>
+      </ons-page>
+    </ons-template>
   </body>
 </html>

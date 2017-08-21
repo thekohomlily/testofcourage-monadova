@@ -160,6 +160,54 @@ font.back-button {
     color: white;
 }
 
+#ranking .page__background {
+    background-color: black;
+}
+
+.ranking-title-text {
+    font-family: 'Bloodyslime';
+    font-size: 80px;
+    color: orange;
+    margin: 60px 0;
+    text-align: center;
+}
+
+.ranking-member {
+    height: 70px;
+}
+
+.ranking-member-name {
+    font-family: 'Bloodyslime';
+    font-size: 25px;
+    color: white;
+    margin: 0 0 0 20px;
+    width: 200px;
+    float: left;
+}
+
+.ranking-member-score {
+    font-family: 'Bloodyslime';
+    font-size: 25px;
+    color: white;
+    margin: 0;
+}
+
+.ranking-text-onryou {
+    font-family: 'onryou';
+    font-size: 25px;
+    color: white;
+    margin:20px;
+    width: 200px;
+}
+
+.ranking-text-bloodyslime {
+    font-family: 'bloodyslime';
+    font-size: 40px;
+    color: white;
+    margin: 0 0 0 20px;
+    text-align: center;
+}
+
 
 @font-face {
     font-family: 'Bloodyslime';
