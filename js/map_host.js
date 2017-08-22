@@ -300,7 +300,7 @@ window.addEventListener('load', function() {
             this.infoWindow.open(this.map, this);
             //alert('hongege'); // When click marker
         },
-        icon: 'image/enter.png',
+        icon: '../image/enter.png',
         animation: google.maps.Animation.BOUNCE,
         //animation: google.maps.Animation.DROP,
         //clickable: false,
