@@ -1,7 +1,7 @@
 var window_obj = null;
 
 function gotoMap() {
-     window_obj = window.open('html/map1.html', '_blank', 'width=400, height=400, menubar=no, toolbar=no, scrollbars=yes');
+     window_obj = window.open('map2.html', '_blank', 'width=400, height=400, menubar=no, toolbar=no, scrollbars=yes');
 
 }
 
@@ -9,7 +9,7 @@ function closeMap() {
     if(window.opener){
         // ウィンドウを閉じる
 //        window.close();
-            window.open('after_map1.html', '_self', 'width=400, height=400, menubar=no, toolbar=no, scrollbars=yes');
+            window.open('after_map2.html', '_self', 'width=400, height=400, menubar=no, toolbar=no, scrollbars=yes');
     }
 }
 
