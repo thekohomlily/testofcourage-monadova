@@ -61,6 +61,7 @@
     </script>
     <!-- END Google Map -->
 
+    <!-- Onsen UI から HTML へのページ遷移 -->
     <script type="text/javascript" src="js/map1.js"></script>
 
   </head>
@@ -245,12 +246,14 @@
             <p class="role-explain-text">逃げる</p>
           </div>
 
-          <input class="next-button next-button-next" type="button" value="input" onclick="gotoMap1()"><br>
+          <!-- この2つのボタンはどちらも同じ動きをする -->
+          <input class="next-button next-button-next" type="button" value="input" onclick="gotoMap1()">
 
           <ons-button class="next-button"
             onclick="gotoMap1()">
             <p class="next-button-next">Next</p>
           </ons-button>
+          <!-- ======================================= -->
 
           <!-- <div class="next-button"> -->
           <!--   <p class="next-button-next" ng-click="gotomap1()">Next</p> -->
