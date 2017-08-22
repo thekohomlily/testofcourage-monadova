@@ -113,6 +113,39 @@ font.back-button {
     margin: 60px 0 50px 250px;
 }
 
+/* Gather load */
+#gather-load .page__background{
+    background-color: black;
+}
+
+.gather-load-title-text {
+    font-family: 'onryou';
+    font-size: 60px;
+    color: orange;
+    margin: 60px 0;
+    text-align: center;
+}
+
+.gather-load-member {
+    height: 70px;
+}
+
+.gather-load-member-number {
+    font-family: 'Bloodyslime';
+    font-size: 25px;
+    color: white;
+    margin: 0 0 0 20px;
+    width: 130px;
+    float: left;
+}
+
+.gather-load-member-name {
+    font-family: 'Bloodyslime';
+    font-size: 25px;
+    color: white;
+    margin: 0;
+}
+
 /* Role */
 #role .page__background {
     background-color: black;
@@ -207,6 +240,19 @@ font.back-button {
     margin: 0 0 0 20px;
     text-align: center;
 }
+
+/* Loading */
+#loading .page__background{
+    background-color: black;
+}
+
+.loading-text {
+    font-family: 'onryou';
+    font-size: 50px;
+    color: orange;
+    margin: 250px 0 100px;
+}
+
 
 
 @font-face {

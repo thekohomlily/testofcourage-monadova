@@ -24,6 +24,19 @@
       console.log("Onsen UI is ready!");
       });
     </script>
+    <!-- loadindEvent -->
+    <script>
+      function jumpPage() {
+       navi.pushPage('map.html')
+      }
+      document.addEventListener("init", function(event) {
+	  var page = event.target;
+	  if(page.id === "loading") {
+	  setTimeout("jumpPage()",5000)
+      }
+      });
+    </script>
+    <!-- endLoadingEvent -->
 
     <!-- Google Map -->
     <!-- Google Maps JavaScript API: AIzaSyAr-M4xQh2xLBloiUpCTkvIv_PTyNisl_k -->
@@ -88,7 +101,7 @@
             <div class="container-inner">
               <p class="menu-title-text">Menu</p>
               <p class="select-menu" ng-click="navi.pushPage('gather.html')">チームを作る</p>
-              <p class="select-menu">チームに参加する</p>
+              <p class="select-menu" ng-click="navi.pushPage('gather-load.html')">チームに参加する</p>
               <p class="select-menu">プロフィールの設定</p>
               <p class="select-menu">遊び方</p>
             </div><!-- contaner-inner -->
@@ -133,6 +146,47 @@
           </div>
           <div class="next-button">
             <p class="next-button-next" ng-click="navi.pushPage('role.html')">Next</p>
+          </div>
+        </div><!-- gather-container -->
+      </ons-page>
+    </ons-template>
+
+    <!-- Gather load  -->
+    <ons-template id="gather-load.html">
+      <ons-page id="gather-load">
+        <div class="left">
+          <ons-back-button>
+            <font class="back-button">Back</font>
+          </ons-back-button>
+        </div>
+        <div class="gather-load-container">
+          <p class="gather-load-title-text">メンバー募集</p>
+          <div class="gather-load-member">
+            <p class="gather-load-member-number">Member I</p>
+            <p class="gather-load-member-name">Shohei Ueda</p>
+          </div>
+          <div class="gather-load-member">
+            <p class="gather-load-member-number">Member II</p>
+            <p class="gather-load-member-name">Akihiko Mizuno</p>
+          </div>
+          <div class="gather-load-member">
+            <p class="gather-load-member-number">Member III</p>
+            <p class="gather-load-member-name">Kaisei Shimura</p>
+          </div>
+          <div class="gather-load-member">
+            <p class="gather-load-member-number">Member IV</p>
+            <p class="gather-load-member-name">Taro Aizu</p>
+          </div>
+          <div class="gather-load-member">
+            <p class="gather-load-member-number">Member V</p>
+            <p class="gather-load-member-name">Zashiki Warashi</p>
+          </div>
+          <div class="gather-load-member">
+            <p class="gather-load-member-number">Member VI</p>
+            <p class="gather-load-member-name">Oni</p>
+          </div>
+          <div class="next-button">
+            <p class="next-button-next" ng-click="navi.pushPage('loading.html')">Next</p>
           </div>
         </div><!-- gather-container -->
       </ons-page>
@@ -191,6 +245,20 @@
             <p class="next-button-next" ng-click="navi.pushPage('map.html')">Next</p>
           </div>
         </div><!-- role-container -->
+      </ons-page>
+    </ons-template>
+
+
+    <!-- loading -->
+    <ons-template id="loading.html">
+      <ons-page id="loading">
+	<div class="left">
+	</div>
+	<div class="loading-container">
+	  <div class="container-inner">
+	    <p class="loading-text">ローディング中...</p>
+	  </div>
+	</div><!-- loading-container -->
       </ons-page>
     </ons-template>
 
