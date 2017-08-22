@@ -26,16 +26,13 @@
     </script>
 
     <!-- Onsen UI から HTML へのページ遷移 -->
-    <script type="text/javascript" src="../js/map2.js"></script>
+    <script type="text/javascript" src="../js/map3.js"></script>
 
   </head>
   <body>
     <ons-navigator
       var="navi"
-      page="item.html"
-      ng-controller="AppController as app"
-      ons-postpush="app.pushes = app.pushes + 1"
-      ons-postpop="app.pops = app.pops + 1">
+      page="standby.html"
     </ons-navigator>
 
     <audio autoplay loop>
@@ -43,7 +40,7 @@
     </audio>
 
     <!-- アイテムの生成と配置 -->
-    <ons-template id="item.html">
+    <ons-template id="standby.html">
       <ons-page>
         <ons-toolbar>
           <div class="left">
@@ -52,19 +49,12 @@
           <div class="center">Test of courage</div>
         </ons-toolbar>
         <p>
-          アイテムの生成と配置をここで行います。
+          ゲーム開始の確認画面
         </p>
         <section style="padding: 10px">
 
-          <input class="next-button next-button-next" type="button" value="input" onclick="gotoMap2()">
+          <input class="next-button next-button-next" type="button" value="Game Start" onclick="gotoMap()">
 
-          <!-- <ons-button ng-click="navi.pushPage('item.html')"> -->
-          <!--   Push Page -->
-          <!-- </ons-button> -->
-
-          <p>
-            You have pushed {{ app.pushes }} times and popped {{ app.pops }} times.
-          </p>
         </section>
       </ons-page>
     </ons-template>
