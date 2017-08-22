@@ -24,6 +24,7 @@
       console.log("Onsen UI is ready!");
       });
     </script>
+
     <!-- loadindEvent -->
     <script>
       function jumpPage() {
@@ -59,6 +60,8 @@
       };
     </script>
     <!-- END Google Map -->
+
+    <script type="text/javascript" src="js/map1.js"></script>
 
   </head>
   <body>
@@ -241,9 +244,18 @@
             <ons-switch class="role-explain-checkbox"></ons-switch>
             <p class="role-explain-text">逃げる</p>
           </div>
-          <div class="next-button">
-            <p class="next-button-next" ng-click="navi.pushPage('map.html')">Next</p>
-          </div>
+
+          <input class="next-button next-button-next" type="button" value="input" onclick="gotoMap1()"><br>
+
+          <ons-button class="next-button"
+            onclick="gotoMap1()">
+            <p class="next-button-next">Next</p>
+          </ons-button>
+
+          <!-- <div class="next-button"> -->
+          <!--   <p class="next-button-next" ng-click="gotomap1()">Next</p> -->
+          <!-- </div> -->
+
         </div><!-- role-container -->
       </ons-page>
     </ons-template>
@@ -261,6 +273,7 @@
 	</div><!-- loading-container -->
       </ons-page>
     </ons-template>
+
 
     <!-- Map -->
     <ons-template id="map.html">
