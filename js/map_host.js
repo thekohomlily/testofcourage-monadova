@@ -229,22 +229,17 @@ window.addEventListener('load', function() {
 
 
             // Print route
-            var waypts_obj = [];
-            for(var i = 0; i < wps.length; i++) {
-                console.log();
-                waypts_obj.push({
-                    location: new google.maps.LatLng( wps[i][0], wps[i][1] ),
-                    stopover: true
-                });
-            }
-
-            // var waypts_obj = [
-            //     {location: new google.maps.LatLng(wp1_lat, wp1_lng)},
-            //     {location: new google.maps.LatLng(wp2_lat, wp2_lng)},
-            //     {location: new google.maps.LatLng(wp3_lat, wp3_lng)}
-            // ];
-
             $('#get_route').click(function(e){
+                var waypts_obj = [];
+                for(var i = 0; i < wps.length; i++) {
+                    console.log(i);
+                    waypts_obj.push({
+                        location: new google.maps.LatLng( wps[i][0], wps[i][1] ),
+                    });
+                }
+
+                console.log(waypts_obj);
+
                 map.drawRoute({
                     origin: [s_lat, s_lng],       // 出発地点の座標: Start point
                     destination: [g_lat, g_lng],  // 到着地点の座標: Goal point
@@ -285,8 +280,6 @@ window.addEventListener('load', function() {
                 });
 
                 var timer = setInterval(function(){
-                    //do something
-                    console.log("do something");
 
                     e.preventDefault();
                     $('#instructions').empty();
@@ -340,7 +333,7 @@ window.addEventListener('load', function() {
                     });
 
                     clearInterval(timer);
-                }, intervalTime * 3);
+                }, intervalTime * wps.length);
             });
             // end $('#start_travel').click(function(e){
 
