@@ -392,7 +392,7 @@ window.addEventListener('load', function() {
     });
 
 
-    $('#start_travel0').click(function(e){
+    $('#start_travel').click(function(e){
 
         var cnt = 0;
         var intervalTime = 15000;

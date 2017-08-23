@@ -4,36 +4,36 @@ var s_lng = 139.9362;
 // Goal point
 var g_lat = 0;
 var g_lng = 0;
-// Waypoint 1
-var wp1_lat = 0;
-var wp1_lng = 0;
-// Waypoint 2
-var wp2_lat = 0;
-var wp2_lng = 0;
+// Waypoints
+var wps = [];
 
-// Set goal point
-g_lat = s_lat + 0.01;
-g_lng = s_lng + 0.01;
-// Set waypoint 1
-wp1_lat = s_lat + 0.01;
-wp1_lng = s_lng - 0.01;
-// Set waypoint 2
-wp2_lat = s_lat - 0.01;
-wp2_lng = s_lng - 0.01;
-// Set waypoint 3
-wp3_lat = s_lat - 0.01;
-wp3_lng = s_lng + 0.01;
-
-var wps = [
-    [wp1_lat, wp1_lng],
-    [wp2_lat, wp2_lng],
-    [wp3_lat, wp3_lng],
-];
+// google.maps.Animation.BOUNCE = 1
+// google.maps.Animation.DROP   = 2
+var marker_normal = 0;
+var marker_bounce = 1;
+var marker_drop   = 2;
 
 var wait_geolocat = 1;  // 1: wait, 0: you can go to next
 
+//================================================================================
+
 // Get you are here function
 function GetCurrentLocation() {
+    // navigator.geolocation.getCurrentPosition(
+    //     function( position )
+    //     {
+    //         var data = position.coords ;
+    //         s_lat = data.latitude ;
+    //         s_lng = data.longitude ;
+    //         console.log(lat);
+    //         console.log(lng);
+    //         wait_geolocat = 0;
+    //     },
+    //     function( error )
+    //     {
+    //         console.log( error.code );
+    //     }
+    // );
     GMaps.geolocate({
         success: function(position){
             //map.setCenter(position.coords.latitude, position.coords.longitude);
@@ -78,91 +78,45 @@ function InitMap() {
             title: 'Add item',
             name: 'add_item',
             action: function(e) {
-                // Put waypoint-i marker
                 this.setCenter(e.latLng.lat(), e.latLng.lng());
-                var marker = this.addMarker({
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng(),
-                    title: 'Waypoint 1',  // title of marker
-                    infoWindow: {
-                        content: '<h4>Waypoint 1</h4><ul><li>Item 1</li></ul>'  // add info
-                    },
-                    click: function(e) {
-                        this.infoWindow.open(this.map, this);
-                        //alert('hongege'); // When click marker
-                    },
-                    dblclick: function(e) {
-                        // アイテムをダブルクリックでページのリロード
-                        location.reload();
-                    },
-                    icon: '../image/item_1.png',
-                    //animation: google.maps.Animation.BOUNCE,
-                    animation: google.maps.Animation.DROP,
-                    //clickable: false,
-                    //cursor: "url(./../image/ghost_3.jpg), auto" ,
-                });
 
+                // Put waypoint-i marker
+                var i_title = 'Waypoint';
+                var i_content = '<h4>Waypoint</h4><ul><li>Item</li></ul>';
+                var i_icon = '../image/item_1.png';
+                addMarkerFunc( map, e.latLng.lat(), e.latLng.lng(), i_title, i_content, marker_drop, i_icon );
+
+                wps.push( [e.latLng.lat(), e.latLng.lng()] );
                 // 配列に以下を代入する必要あり todo
-                console.log(e.latLng.lat());
-                console.log(e.latLng.lng());
+                console.log( wps );
             }
         }, {
             title: 'Add goal',
             name: 'add_goal',
             action: function(e) {
                 this.setCenter(e.latLng.lat(), e.latLng.lng());
-                g_lat =  e.latLng.lat(),
-                g_lng =  e.latLng.lng(),
+
                 // Put goal marker
-                map.addMarker({
-                    lat: g_lat,
-                    lng: g_lng,
-                    title: 'Goal point',  // title of marker
-                    infoWindow: {
-                        content: '<h4>Goal point</h4><ul><li>ここがゴール地点になります。</li><li>このようにHTMLで埋め込むことが可能。</li></ul>'  // add info
-                    },
-                    click: function(e) {
-                        this.infoWindow.open(this.map, this);
-                        //alert('hongege'); // When click marker
-                    },
-                    dblclick: function(e) {
-                        // アイテムをダブルクリックでページのリロード
-                        location.reload();
-                    },
-                    icon: '../image/exit.png',
-                    animation: google.maps.Animation.BOUNCE,
-                    //animation: google.maps.Animation.DROP,
-                    //clickable: false,
-                });
+                g_lat =  e.latLng.lat();
+                g_lng =  e.latLng.lng();
+                var i_title = 'Goal point';
+                var i_content = '<h4>Goal point</h4><ul><li>ここがゴール地点になります。</li><li>このようにHTMLで埋め込むことが可能。</li></ul>';
+                var i_icon = '../image/exit.png';
+                addMarkerFunc( map, e.latLng.lat(), e.latLng.lng(), i_title, i_content, marker_bounce, i_icon );
             }
         }, {
             title: 'Add start',
             name: 'add_start',
             action: function(e) {
                 this.setCenter(e.latLng.lat(), e.latLng.lng());
-                s_lat =  e.latLng.lat(),
-                s_lng =  e.latLng.lng(),
+
                 // Put start sarker
-                map.addMarker({
-                    lat: s_lat,
-                    lng: s_lng,
-                    title: 'Start point',  // title of marker
-                    infoWindow: {
-                        content: '<h4>Start point</h4><ul><li>現在地がスタート地点になります。</li><li>このようにHTMLで埋め込むことが可能。</li></ul>'  // add info
-                    },
-                    click: function(e) {
-                        this.infoWindow.open(this.map, this);
-                        //alert('hongege'); // When click marker
-                    },
-                    dblclick: function(e) {
-                        // アイテムをダブルクリックでページのリロード
-                        location.reload();
-                    },
-                    icon: '../image/enter.png',
-                    animation: google.maps.Animation.BOUNCE,
-                    //animation: google.maps.Animation.DROP,
-                    //clickable: false,
-                });
+                s_lat =  e.latLng.lat();
+                s_lng =  e.latLng.lng();
+                var i_title = 'Start point';
+                var i_content = '<h4>Start point</h4><ul><li>現在地がスタート地点になります。</li><li>このようにHTMLで埋め込むことが可能。</li></ul>';
+                var i_icon = '../image/enter.png';
+                addMarkerFunc( map, e.latLng.lat(), e.latLng.lng(), i_title, i_content, marker_bounce, i_icon );
             }
         }, {
             title: 'Center here',
@@ -215,11 +169,18 @@ function addMarkerFunc( map, lat, lng, title, content, ani, icon ) {
             this.infoWindow.open(this.map, this);
             //alert('hongege'); // When click marker
         },
+        dblclick: function(e) {
+            // アイテムをダブルクリックでページのリロード
+            location.reload();
+        },
         icon: icon,
         animation: ani,
         //clickable: false,
+        //cursor: "url(./../image/ghost_3.jpg), auto",
     });
 }
+
+//================================================================================
 
 // Main function
 // window.onload = function(){ DoFunctions() };
@@ -232,118 +193,82 @@ window.addEventListener('load', function() {
     var timerID = setInterval( function() {
         if (wait_geolocat == 0) {
 
-            // google.maps.Animation.BOUNCE = 1
-            // google.maps.Animation.DROP   = 2
-            var marker_normal = 0;
-            var marker_bounce = 1;
-            var marker_drop   = 2;
-
             // Init map
             var map = InitMap();
 
-            // Put start sarker
-            var s_title = 'Start point';
-            var s_icon = '../image/enter.png';
-            var s_content = '<h4>Start point</h4><ul><li>現在地がスタート地点になります。</li><li>このようにHTMLで埋め込むことが可能。</li></ul>';
-            addMarkerFunc( map, s_lat, s_lng, s_title, s_content, marker_bounce, s_icon );
+            // // Put start sarker
+            // var s_title = 'Start point';
+            // var s_content = '<h4>Start point</h4><ul><li>現在地がスタート地点になります。</li><li>このようにHTMLで埋め込むことが可能。</li></ul>';
+            // var s_icon = '../image/enter.png';
+            // addMarkerFunc( map, s_lat, s_lng, s_title, s_content, marker_bounce, s_icon );
 
-            // Put goal marker
-            map.addMarker({
-                lat: g_lat,
-                lng: g_lng,
-                title: 'Goal point',  // title of marker
-                infoWindow: {
-                    content: '<h4>Goal point</h4><ul><li>ここがゴール地点になります。</li><li>このようにHTMLで埋め込むことが可能。</li></ul>'  // add info
-                },
-                click: function(e) {
-                    this.infoWindow.open(this.map, this);
-                    //alert('hongege'); // When click marker
-                },
-                icon: '../image/exit.png',
-                animation: google.maps.Animation.BOUNCE,
-                //animation: google.maps.Animation.DROP,
-                //clickable: false,
-            });
+            // // Put goal marker
+            // var g_title = 'Goal point';
+            // var g_content = '<h4>Goal point</h4><ul><li>ここがゴール地点になります。</li><li>このようにHTMLで埋め込むことが可能。</li></ul>';
+            // var g_icon = '../image/exit.png';
+            // addMarkerFunc( map, g_lat, g_lng, g_title, g_content, marker_bounce, g_icon );
 
-            // Put waypoint-1 marker
-            map.addMarker({
-                lat: wp1_lat,
-                lng: wp1_lng,
-                title: 'Waypoint 1',  // title of marker
-                infoWindow: {
-                    content: '<h4>Waypoint 1</h4><ul><li>アイテムの配置やルートの指定を経由地点の指定に見立てればうまく実装できそう。</li></ul><a href="../image/ghost_4.jpg" target="_blank">Preview</a>'  // add info
-                },
-                click: function(e) {
-                    this.infoWindow.open(this.map, this);
-                    //alert('hongege'); // When click marker
-                },
-                icon: '../image/item_1.png',
-                //animation: google.maps.Animation.BOUNCE,
-                animation: google.maps.Animation.DROP,
-                //clickable: false,
-                //cursor: "url(./../image/ghost_3.jpg), auto" ,
-            });
+            // // Put waypoint-1 marker
+            // var i_title = 'Waypoint 1';
+            // var i_content = '<h4>Waypoint 1</h4><ul><li>アイテムの配置やルートの指定を経由地点の指定に見立てればうまく実装できそう。</li></ul><a href="../image/ghost_4.jpg" target="_blank">Preview</a>';
+            // var i_icon = '../image/item_1.png';
+            // addMarkerFunc( map, wp1_lat, wp1_lng, i_title, i_content, marker_bounce, i_icon );
 
-            // Put waypoint-2 marker
-            map.addMarker({
-                lat: wp2_lat,
-                lng: wp2_lng,
-                title: 'Waypoint 2',  // title of marker
-                infoWindow: {
-                    content: '<h4>Waypoint 2</h4><ul><li>アイテムの配置やルートの指定を経由地点の指定に見立てればうまく実装できそう。</li></ul>'  // add info
-                },
-                click: function(e) {
-                    this.infoWindow.open(this.map, this);
-                    //alert('hongege'); // When click marker
-                },
-                icon: '../image/item_2.png',
-                //animation: google.maps.Animation.BOUNCE,
-                animation: google.maps.Animation.DROP,
-                //clickable: false,
-            });
+            // // Put waypoint-2 marker
+            // var i_title = 'Waypoint 2';
+            // var i_content = '<h4>Waypoint 2</h4><ul><li>アイテムの配置やルートの指定を経由地点の指定に見立てればうまく実装できそう。</li></ul>';
+            // var i_icon = '../image/item_2.png';
+            // addMarkerFunc( map, wp2_lat, wp2_lng, i_title, i_content, marker_bounce, i_icon );
 
-            // Put waypoint-3 marker
-            map.addMarker({
-                lat: wp3_lat,
-                lng: wp3_lng,
-                title: 'Waypoint 3',  // title of marker
-                infoWindow: {
-                    content: '<h4>Waypoint 3</h4><ul><li>アイテムの配置やルートの指定を経由地点の指定に見立てればうまく実装できそう。</li></ul>'  // add info
-                },
-                click: function(e) {
-                    this.infoWindow.open(this.map, this);
-                    //alert('hongege'); // When click marker
-                },
-                icon: '../image/item_3.png',
-                //animation: google.maps.Animation.BOUNCE,
-                animation: google.maps.Animation.DROP,
-                //clickable: false,
-            });
+            // // put waypoint-3 marker
+            // var i_title = 'Waypoint 3';
+            // var i_content = '<h4>Waypoint 3</h4><ul><li>アイテムの配置やルートの指定を経由地点の指定に見立てればうまく実装できそう。</li></ul>';
+            // var i_icon = '../image/item_3.png';
+            // addMarkerFunc( map, wp3_lat, wp3_lng, i_title, i_content, marker_bounce, i_icon );
+
+
 
             // Print route
-            map.drawRoute({
-                origin: [s_lat, s_lng],       // 出発地点の座標: Start point
-                destination: [g_lat, g_lng],  // 到着地点の座標: Goal point
-                // waypoint
-                waypoints: [{location: new google.maps.LatLng(wp1_lat, wp1_lng)}, {location: new google.maps.LatLng(wp2_lat, wp2_lng)}, {location: new google.maps.LatLng(wp3_lat, wp3_lng)}],
-                travelMode: 'walking',        // 移動手段: 徒歩
-                strokeColor: '#71ff71',       // ルートラインの色:     green
-                strokeOpacity: 0.5,           // ルートラインの透明度: [0.0, 1.0]
-                strokeWeight: 3,              // ルートラインの太さ:   integer
+            var waypts_obj = [];
+            for(var i = 0; i < wps.length; i++) {
+                console.log();
+                waypts_obj.push({
+                    location: new google.maps.LatLng( wps[i][0], wps[i][1] ),
+                    stopover: true
+                });
+            }
+
+            // var waypts_obj = [
+            //     {location: new google.maps.LatLng(wp1_lat, wp1_lng)},
+            //     {location: new google.maps.LatLng(wp2_lat, wp2_lng)},
+            //     {location: new google.maps.LatLng(wp3_lat, wp3_lng)}
+            // ];
+
+            $('#get_route').click(function(e){
+                map.drawRoute({
+                    origin: [s_lat, s_lng],       // 出発地点の座標: Start point
+                    destination: [g_lat, g_lng],  // 到着地点の座標: Goal point
+                    // waypoint
+                    waypoints: waypts_obj,
+                    travelMode: 'walking',        // 移動手段: 徒歩
+                    strokeColor: '#71ff71',       // ルートラインの色:     green
+                    strokeOpacity: 0.5,           // ルートラインの透明度: [0.0, 1.0]
+                    strokeWeight: 3,              // ルートラインの太さ:   integer
+                });
             });
 
 
-
-            $('#start_travel0').click(function(e){
+            $('#start_travel').click(function(e) {
 
                 var cnt = 0;
-                var intervalTime = 15000;
+                var intervalTime = 15000;  // 15 sec
 
                 e.preventDefault();
                 $('#instructions').empty();
                 map.travelRoute({
                     origin: [s_lat, s_lng],       // 出発地点の座標: Start point
-                    destination: [wp1_lat, wp1_lng],  // 到着地点の座標: Goal point
+                    destination: [wps[0][0], wps[0][1]],  // 到着地点の座標: Goal point
+                    //                    destination: [wp1_lat, wp1_lng],  // 到着地点の座標: Goal point
                     travelMode: 'walking',        // 移動手段: 徒歩
                     step: function(e){
                         $('#instructions').append('<li>'+e.instructions+'</li>');
@@ -396,7 +321,8 @@ window.addEventListener('load', function() {
                     e.preventDefault();
                     $('#instructions').empty();
                     map.travelRoute({
-                        origin: [wp3_lat, wp3_lng],       // 出発地点の座標: Start point
+                        origin: [wps[wps.length - 1][0], wps[wps.length - 1][1]],       // 出発地点の座標: Start point
+                        //                        origin: [wp3_lat, wp3_lng],       // 出発地点の座標: Start point
                         destination: [g_lat, g_lng],  // 到着地点の座標: Goal point
                         travelMode: 'walking',        // 移動手段: 徒歩
                         step: function(e){
@@ -416,7 +342,7 @@ window.addEventListener('load', function() {
                     clearInterval(timer);
                 }, intervalTime * 3);
             });
-            // end $('#start_travel0').click(function(e){
+            // end $('#start_travel').click(function(e){
 
             clearInterval(timerID);
             timerID = null;
